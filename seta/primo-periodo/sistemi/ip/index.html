@@ -4,7 +4,7 @@
 <div class="lesson"><aside class="side"><b>SORGENTE</b><p>Il dispositivo che invia il pacchetto.</p><b>DESTINAZIONE</b><p>Il dispositivo verso cui il pacchetto è diretto.</p></aside><div class="content"><h2>Leggere le colonne</h2><p>In Wireshark, <b>Source</b> indica la sorgente e <b>Destination</b> la destinazione. Guardando più righe puoi capire la direzione della comunicazione.</p><h3>Filtrare per indirizzo</h3><div class="code">ip.addr == 10.0.1.50</div><p>Mostra i pacchetti che coinvolgono quell'indirizzo, sia come sorgente sia come destinazione.</p><div class="code">ip.dst == 203.0.113.42</div><p>Mostra il traffico diretto verso quella destinazione.</p></div></div>
 <div class="card"><h2>Costruisci il tuo filtro</h2><p>Inserisci un IP e scegli che cosa vuoi osservare.</p><div class="formbox"><input id="ip" value="10.0.1.50" aria-label="Indirizzo IP"><button data-kind="addr">IP coinvolto</button><button data-kind="src">Sorgente</button><button data-kind="dst">Destinazione</button></div><div id="out" class="code">ip.addr == 10.0.1.50</div></div>
 <div class="warning"><b>Attenzione:</b> un IP identifica un'interfaccia a livello IP. Non va confuso con l'indirizzo MAC, che appartiene a un livello diverso.</div>
-<section class="visual-learning reveal">
+<section class="visual-learning">
   <div class="image-card"><img src="../../../../assets/ip-address.svg" alt="Schema di un indirizzo IPv4 con sorgente e destinazione">
     <div class="caption"><b>Un indirizzo IP non è solo un numero.</b> In IPv4 è formato da 32 bit, normalmente scritti come quattro ottetti decimali. Insieme alla subnet mask permette di distinguere la parte di rete dalla parte che identifica l'host.</div>
   </div>

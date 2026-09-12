@@ -1,18 +1,61 @@
 <!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Componenti della rete · SETA</title><link rel="stylesheet" href="../../../../style.css"></head><body><header><a class="logo" href="../../../../index.html"><b>⌁</b> SETA</a><div class="crumb">01 / COMPONENTI DELLA RETE</div><a class="backtop" style="margin-left:auto" href="../index.html">← MAPPA</a></header><main class="page"><a class="back" href="../index.html">← TORNA ALLA MAPPA</a><div class="eyebrow">01 · FONDAMENTI</div><h1>Chi fa <em>cosa?</em></h1><p class="lead">Client, server, switch e router sono quattro ruoli fondamentali. Capirli permette di interpretare ciò che vedremo in Wireshark.</p>
 <div class="definition"><strong>IDEA CHIAVE</strong><p>Una comunicazione non è solo “un computer che parla con un altro”: ci sono dispositivi che chiedono, offrono, collegano e instradano.</p></div>
 <div class="flow"><div class="device"><b>CLIENT</b>chiede</div><span class="arrow">→</span><div class="device"><b>SWITCH</b>collega</div><span class="arrow">→</span><div class="device"><b>ROUTER</b>instrada</div><span class="arrow">→</span><div class="device"><b>SERVER</b>risponde</div></div>
+
+<div class="visual-legend">
+  <div><i>01</i><b>CLIENT</b><span>genera la richiesta</span></div>
+  <div><i>02</i><b>SWITCH</b><span>collega la LAN</span></div>
+  <div><i>03</i><b>ROUTER</b><span>collega reti diverse</span></div>
+  <div><i>04</i><b>SERVER</b><span>offre il servizio</span></div>
+</div>
+
 <div class="tabs" role="tablist"><button class="tab" aria-selected="true" data-tab="client">Client</button><button class="tab" aria-selected="false" data-tab="server">Server</button><button class="tab" aria-selected="false" data-tab="switch">Switch</button><button class="tab" aria-selected="false" data-tab="router">Router</button></div>
-<div id="client" class="tabpanel active"><div class="card"><span class="tag">CLIENT</span><h2>Chi chiede?</h2><p>Il client è il dispositivo o programma che avvia una richiesta. Un browser che richiede una pagina web è un esempio.</p><h3>Come lo riconosci?</h3><p>In una comunicazione osservata puoi spesso individuarlo dalla direzione della richiesta, dagli indirizzi e dalle porte utilizzate.</p></div></div>
-<div id="server" class="tabpanel"><div class="card"><span class="tag">SERVER</span><h2>Chi offre il servizio?</h2><p>Il server mette a disposizione un servizio e risponde alle richieste ricevute.</p><h3>Importante</h3><p>“Server” descrive un ruolo: lo stesso computer può essere client in una comunicazione e server in un'altra.</p></div></div>
-<div id="switch" class="tabpanel"><div class="card"><span class="tag">SWITCH</span><h2>Chi collega?</h2><p>Lo switch collega dispositivi della stessa rete locale e inoltra frame verso la porta appropriata.</p><h3>Da ricordare</h3><p>Opera principalmente a livello di collegamento e usa gli indirizzi MAC per prendere decisioni di inoltro.</p></div></div>
-<div id="router" class="tabpanel"><div class="card"><span class="tag">ROUTER</span><h2>Chi instrada?</h2><p>Il router collega reti differenti e decide dove inoltrare i pacchetti IP.</p><h3>In pratica</h3><p>Quando la destinazione non appartiene alla rete locale, il traffico può essere inviato verso il router/gateway.</p></div></div>
+<div id="client" class="tabpanel active">
+  <div class="role-layout">
+    <div class="role-copy"><span class="tag">CLIENT</span><h2>Chi chiede?</h2>
+      <p>Il client è il dispositivo o programma che <b>avvia una richiesta</b>. Un browser che richiede una pagina web è un esempio.</p>
+      <div class="role-points"><span>↗ avvia la richiesta</span><span>⌁ usa una porta</span><span>◎ riceve la risposta</span></div>
+    </div>
+    <img src="../../../../assets/client-server.svg" alt="Animazione client server: richiesta e risposta">
+  </div>
+</div>
+<div id="server" class="tabpanel">
+  <div class="role-layout">
+    <div class="role-copy"><span class="tag">SERVER</span><h2>Chi offre il servizio?</h2>
+      <p>Il server mette a disposizione un servizio e <b>risponde alle richieste</b> ricevute.</p>
+      <div class="role-points"><span>◉ resta in ascolto</span><span>↙ riceve richieste</span><span>↗ restituisce una risposta</span></div>
+      <p class="micro-note">“Server” descrive un ruolo: lo stesso computer può essere client in una comunicazione e server in un'altra.</p>
+    </div>
+    <img src="../../../../assets/client-server.svg" alt="Animazione client server: il server risponde">
+  </div>
+</div>
+<div id="switch" class="tabpanel">
+  <div class="role-layout">
+    <div class="role-copy"><span class="tag">SWITCH</span><h2>Chi collega?</h2>
+      <p>Lo switch collega dispositivi della <b>stessa rete locale</b> e inoltra i frame verso la porta appropriata.</p>
+      <div class="role-points"><span>LAN locale</span><span>indirizzi MAC</span><span>inoltro dei frame</span></div>
+      <p class="micro-note"><b>Idea chiave:</b> lo switch fa comunicare tra loro i dispositivi che appartengono alla stessa LAN.</p>
+    </div>
+    <img src="../../../../assets/switch-lan.svg" alt="Switch che collega quattro dispositivi della stessa LAN">
+  </div>
+</div>
+<div id="router" class="tabpanel">
+  <div class="role-layout">
+    <div class="role-copy"><span class="tag">ROUTER</span><h2>Chi instrada?</h2>
+      <p>Il router collega <b>reti differenti</b> e decide dove inoltrare i pacchetti IP.</p>
+      <div class="role-points"><span>LAN A</span><span>→ ROUTER →</span><span>LAN B</span></div>
+      <p class="micro-note"><b>Idea chiave:</b> se la destinazione non appartiene alla rete locale, il traffico può essere inviato verso il router/default gateway.</p>
+    </div>
+    <img src="../../../../assets/router-lans.svg" alt="Router che interconnette due LAN differenti">
+  </div>
+</div>
 <section class="section"><div class="eyebrow">APPROFONDIMENTO</div><h2>Domande frequenti</h2>
 <div class="accordion"><button>Un server è sempre un computer potente? <span>+</span></button><div class="answer">No. “Server” indica soprattutto il ruolo svolto: offrire un servizio. Anche un dispositivo relativamente semplice può funzionare da server.</div></div>
 <div class="accordion"><button>Switch e router fanno la stessa cosa? <span>+</span></button><div class="answer">No. Lo switch collega dispositivi all'interno di una rete locale; il router collega reti e instrada pacchetti IP.</div></div>
 <div class="accordion"><button>In Wireshark vedo direttamente questi ruoli? <span>+</span></button><div class="answer">Non sempre. Li deduci dalla comunicazione osservando indirizzi, porte, protocolli e direzione del traffico.</div></div></section>
 <div class="tip"><b>Collegamento con Wireshark:</b> quando analizzi una cattura, non limitarti a leggere una riga: chiediti sempre chi sta chiedendo, chi sta rispondendo e attraverso quali reti passa il traffico.</div>
 
-<section class="visual-learning reveal">
+<section class="visual-learning">
   <div class="section-title"><div><div class="eyebrow">ARCHITETTURA</div><h2>Quattro ruoli, quattro funzioni</h2></div>
   <p>La rete diventa più semplice quando distinguiamo chi utilizza un servizio, chi lo offre e quali apparati collegano i dispositivi.</p></div>
   <div class="visual-grid">
