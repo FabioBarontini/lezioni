@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600">
+<defs><linearGradient id="a" x1="0" x2="1"><stop stop-color="#57e6ff"/><stop offset="1" stop-color="#a98cff"/></linearGradient></defs>
+<rect width="1100" height="600" rx="28" fill="#09111d"/>
+<text x="60" y="65" fill="#57e6ff" font-family="Arial" font-size="16" font-weight="800" letter-spacing="4">INCAPSULAMENTO</text>
+<g font-family="Arial"><rect x="150" y="105" width="800" height="80" rx="14" fill="#101c2b" stroke="#324861"/><text x="550" y="154" text-anchor="middle" fill="#edf5ff" font-size="25" font-weight="800">DATI</text><text x="550" y="177" text-anchor="middle" fill="#8fa4bb" font-size="14">contenuto dell'applicazione</text>
+<rect x="105" y="215" width="890" height="80" rx="14" fill="#101c2b" stroke="#324861"/><text x="550" y="264" text-anchor="middle" fill="#edf5ff" font-size="25" font-weight="800">TRASPORTO</text><text x="550" y="287" text-anchor="middle" fill="#8fa4bb" font-size="14">TCP / UDP</text>
+<rect x="60" y="325" width="980" height="80" rx="14" fill="#101c2b" stroke="#324861"/><text x="550" y="374" text-anchor="middle" fill="#edf5ff" font-size="25" font-weight="800">IP</text><text x="550" y="397" text-anchor="middle" fill="#8fa4bb" font-size="14">sorgente + destinazione</text>
+<rect x="15" y="435" width="1070" height="80" rx="14" fill="#101c2b" stroke="#324861"/><text x="550" y="484" text-anchor="middle" fill="#edf5ff" font-size="25" font-weight="800">FRAME</text><text x="550" y="507" text-anchor="middle" fill="#8fa4bb" font-size="14">collegamento locale</text></g>
+<path d="M75 535H1025" stroke="url(#a)" stroke-width="4" stroke-dasharray="10 12"><animate attributeName="stroke-dashoffset" from="0" to="-44" dur="1.5s" repeatCount="indefinite"/></path>
+</svg>

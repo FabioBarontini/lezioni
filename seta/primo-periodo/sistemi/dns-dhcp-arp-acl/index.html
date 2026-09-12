@@ -1,0 +1,84 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DNS DHCP ARP ACL · SETA</title><link rel="stylesheet" href="../../../../style.css"></head><body><header><a class="logo" href="../../../../index.html"><b>⌁</b> SETA</a><div class="crumb">05 / DNS · DHCP · ARP · ACL</div><a class="backtop" style="margin-left:auto" href="../index.html">← MAPPA</a></header><main class="page"><a class="back" href="../index.html">← TORNA ALLA MAPPA</a><div class="eyebrow">05 · SERVIZI E CONTROLLO</div><h1>Quattro sigle.<br><em>Quattro problemi.</em></h1><p class="lead">Il modo più semplice per capirle è partire dalla domanda a cui ciascun meccanismo risponde.</p>
+<div class="glossary"><div><b>DNS</b><p><strong>Qual è l'indirizzo?</strong><br>Traduce nomi di dominio in indirizzi IP.</p></div><div><b>DHCP</b><p><strong>Come mi configuro?</strong><br>Assegna automaticamente parametri di rete.</p></div><div><b>ARP</b><p><strong>Chi possiede questo IP?</strong><br>Associa IP e MAC nella rete locale IPv4.</p></div><div><b>ACL</b><p><strong>Chi può passare?</strong><br>Applica regole che permettono o negano traffico.</p></div></div>
+<section class="section"><div class="eyebrow">APPROFONDIMENTO</div><div class="accordion"><button>DNS: cosa succede quando scrivo un nome? <span>+</span></button><div class="answer">Il dispositivo può inviare una richiesta DNS per ottenere l'indirizzo IP associato al nome. In Wireshark il filtro <code>dns</code> aiuta a isolare queste comunicazioni.</div></div><div class="accordion"><button>DHCP: come ottiene l'indirizzo un dispositivo? <span>+</span></button><div class="answer">DHCP permette di ottenere automaticamente parametri come indirizzo IP, gateway e DNS, secondo la configurazione della rete.</div></div><div class="accordion"><button>ARP: perché serve nella LAN? <span>+</span></button><div class="answer">Quando occorre inviare dati a un host IPv4 della rete locale, ARP può essere usato per conoscere il MAC associato all'indirizzo IP.</div></div><div class="accordion"><button>ACL: cosa controlla? <span>+</span></button><div class="answer">Un'ACL è un insieme di regole che può permettere o negare determinati flussi in base a criteri configurati dall'amministratore.</div></div></section>
+<div class="tip"><b>Collegamento con Wireshark:</b> cerca prima il problema (“voglio vedere le richieste DNS”), poi usa il protocollo o il filtro adatto.</div>
+<section class="visual-learning reveal">
+  <div class="image-card"><img src="../../../../assets/services-flow.svg" alt="Schema animato di DNS DHCP ARP e ACL"></div>
+  <div class="service-cards">
+    <details open><summary><b>DNS</b><span>Nome → indirizzo IP</span></summary><p>Quando scrivi un nome come <code>www.esempio.it</code>, il DNS aiuta a trovare l'indirizzo IP associato. È una specie di rubrica distribuita della rete.</p><div class="mini-flow">www.esempio.it <b>→</b> DNS <b>→</b> 203.0.113.42</div></details>
+    <details><summary><b>DHCP</b><span>Configura automaticamente un host</span></summary><p>Un client può ottenere automaticamente indirizzo IP, subnet mask, gateway e DNS. Il processo classico è spesso ricordato come <b>DORA</b>: Discover, Offer, Request, Acknowledge.</p></details>
+    <details><summary><b>ARP</b><span>IP → MAC nella LAN</span></summary><p>Quando un host deve consegnare un frame a un dispositivo della rete locale, ARP permette di associare un indirizzo IPv4 al relativo indirizzo MAC.</p></details>
+    <details><summary><b>ACL</b><span>Regole sul traffico</span></summary><p>Una Access Control List contiene regole che possono permettere o negare determinati flussi, in base a criteri come indirizzi, protocolli o porte.</p></details>
+  </div>
+  <div class="interactive-card">
+    <div class="eyebrow">INTERAZIONE · SERVIZI</div><h3>Quale servizio ti serve?</h3>
+    <div class="choice-row service-choice">
+      <button class="choice" data-service="dns">Conosco il nome ma non l'IP</button>
+      <button class="choice" data-service="dhcp">Un PC appena collegato deve ricevere la configurazione</button>
+      <button class="choice" data-service="arp">Conosco l'IP locale e devo trovare il MAC</button>
+      <button class="choice" data-service="acl">Devo permettere o bloccare traffico secondo una regola</button>
+    </div>
+    <p class="feedback" data-service-feedback>Scegli uno scenario.</p>
+  </div>
+</section>
+</main><footer>SETA · SISTEMI E RETI · SERVIZI</footer><script>document.querySelectorAll('.accordion button').forEach(b=>b.addEventListener('click',()=>{b.parentElement.classList.toggle('open');b.querySelector('span').textContent=b.parentElement.classList.contains('open')?'−':'+'}));</script>
+<script>
+(function(){
+  const header=document.querySelector('header');
+  if(header){
+    const nav=header.querySelector('.nav');
+    if(nav){
+      const btn=document.createElement('button');
+      btn.className='mobile-menu-toggle';
+      btn.setAttribute('aria-label','Apri menu');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML='☰';
+      header.appendChild(btn);
+      btn.addEventListener('click',()=>{
+        const open=nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded',String(open));
+        btn.innerHTML=open?'×':'☰';
+      });
+      nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+        nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.innerHTML='☰';
+      }));
+    }
+  }
+  const bar=document.createElement('div');
+  bar.className='mobile-progress';
+  document.body.prepend(bar);
+  const update=()=>{
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  };
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',update);
+  update();
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-answer-box] .choice').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('[data-answer-box] .choice').forEach(x=>x.classList.remove('correct','wrong'));
+      const ok=b.dataset.correct==='1';
+      b.classList.add(ok?'correct':'wrong');
+      const f=document.querySelector('[data-answer-box] + .feedback');
+      if(f) f.textContent=ok ? 'Corretto: lo switch collega i dispositivi della stessa LAN. Se invece la destinazione è in un’altra rete, serve un router.' : 'Quasi: pensa alla differenza tra collegare dispositivi nella stessa LAN e interconnettere reti diverse.';
+    });
+  });
+  const ip=document.querySelector('[data-ip-check]');
+  if(ip) ip.addEventListener('click',()=>{
+    const f=document.querySelector('[data-ip-feedback]');
+    if(f) f.innerHTML='<b>Risultato:</b> sì. Con /24 entrambi appartengono alla rete <code>192.168.1.0/24</code>, quindi sono nella stessa rete IP.';
+  });
+  document.querySelectorAll('[data-service]').forEach(b=>b.addEventListener('click',()=>{
+    const answers={dns:'DNS: serve a risolvere un nome di dominio in un indirizzo IP.',dhcp:'DHCP: assegna automaticamente la configurazione di rete al client.',arp:'ARP: associa un indirizzo IPv4 locale al corrispondente indirizzo MAC.',acl:'ACL: applica regole per permettere o negare traffico.'};
+    const f=document.querySelector('[data-service-feedback]'); if(f) f.textContent=answers[b.dataset.service];
+  }));
+});
+</script>
+</body></html>

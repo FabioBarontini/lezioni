@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#57e6ff"/><stop offset="1" stop-color="#a98cff"/></linearGradient></defs>
+<rect width="1000" height="470" rx="28" fill="#07111c"/>
+<text x="55" y="50" fill="#8198ad" font-family="monospace" font-size="16">INDIRIZZO IP · IDENTITÀ LOGICA NELLA RETE</text>
+<g transform="translate(60 110)">
+<rect width="880" height="125" rx="20" fill="#0b1b29" stroke="#28455d"/>
+<text x="35" y="42" fill="#8198ad" font-family="monospace" font-size="14">IPv4 · 32 BIT · 4 OTTETTI</text>
+<text x="35" y="92" fill="white" font-family="monospace" font-size="38">192</text><text x="180" y="92" fill="#557087" font-family="monospace" font-size="38">.</text>
+<text x="205" y="92" fill="white" font-family="monospace" font-size="38">168</text><text x="350" y="92" fill="#557087" font-family="monospace" font-size="38">.</text>
+<text x="375" y="92" fill="white" font-family="monospace" font-size="38">1</text><text x="430" y="92" fill="#557087" font-family="monospace" font-size="38">.</text>
+<text x="455" y="92" fill="white" font-family="monospace" font-size="38">50</text>
+<path d="M570 48v50M700 48v50" stroke="#34536a"/>
+<text x="635" y="38" text-anchor="middle" fill="#57e6ff" font-size="13" font-family="monospace">NETWORK</text>
+<text x="820" y="38" text-anchor="middle" fill="#a98cff" font-size="13" font-family="monospace">HOST</text>
+</g>
+<g transform="translate(60 280)">
+<rect width="260" height="105" rx="18" fill="#0c1b29" stroke="#34566d"/><text x="130" y="36" text-anchor="middle" fill="#57e6ff" font-family="monospace">SOURCE IP</text><text x="130" y="70" text-anchor="middle" fill="white" font-size="21">192.168.1.50</text></g>
+<path d="M320 332H675" stroke="#38556d" stroke-width="3" stroke-dasharray="9 11"/>
+<circle cx="500" cy="332" r="7" fill="#57e6ff"><animate attributeName="cx" values="330;665;330" dur="2.2s" repeatCount="indefinite"/></circle>
+<g transform="translate(680 280)"><rect width="260" height="105" rx="18" fill="#0f1b31" stroke="#62568e"/><text x="130" y="36" text-anchor="middle" fill="#a98cff" font-family="monospace">DESTINATION IP</text><text x="130" y="70" text-anchor="middle" fill="white" font-size="21">203.0.113.42</text></g>
+</svg>

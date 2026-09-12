@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#57e6ff"/><stop offset="1" stop-color="#a98cff"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect width="1000" height="540" rx="28" fill="#07111c"/>
+<text x="55" y="50" fill="#8198ad" font-family="monospace" font-size="16">ROUTER · INTERCONNETTE RETI DIVERSE</text>
+<g transform="translate(55 110)"><rect width="350" height="300" rx="24" fill="#0b1a27" stroke="#29455c"/><text x="175" y="40" text-anchor="middle" fill="#57e6ff" font-family="monospace">LAN A · 192.168.1.0/24</text>
+<path d="M175 150L80 90M175 150L270 90M175 150L175 235" stroke="#36556c" stroke-width="5"/>
+<circle cx="175" cy="150" r="38" fill="#102c3d" stroke="#57e6ff" stroke-width="3"/><text x="175" y="157" text-anchor="middle" fill="white" font-size="15">SWITCH</text>
+<circle cx="80" cy="90" r="23" fill="#10202d" stroke="#36556c"/><text x="80" y="95" text-anchor="middle" fill="white" font-size="12">PC</text>
+<circle cx="270" cy="90" r="23" fill="#10202d" stroke="#36556c"/><text x="270" y="95" text-anchor="middle" fill="white" font-size="12">PC</text>
+<circle cx="175" cy="235" r="23" fill="#10202d" stroke="#36556c"/><text x="175" y="240" text-anchor="middle" fill="white" font-size="12">PC</text></g>
+<g transform="translate(595 110)"><rect width="350" height="300" rx="24" fill="#0b1a27" stroke="#29455c"/><text x="175" y="40" text-anchor="middle" fill="#a98cff" font-family="monospace">LAN B · 192.168.2.0/24</text>
+<path d="M175 150L80 90M175 150L270 90M175 150L175 235" stroke="#36556c" stroke-width="5"/>
+<circle cx="175" cy="150" r="38" fill="#171d38" stroke="#a98cff" stroke-width="3"/><text x="175" y="157" text-anchor="middle" fill="white" font-size="15">SWITCH</text>
+<circle cx="80" cy="90" r="23" fill="#10202d" stroke="#36556c"/><text x="80" y="95" text-anchor="middle" fill="white" font-size="12">PC</text>
+<circle cx="270" cy="90" r="23" fill="#10202d" stroke="#36556c"/><text x="270" y="95" text-anchor="middle" fill="white" font-size="12">PC</text>
+<circle cx="175" cy="235" r="23" fill="#10202d" stroke="#36556c"/><text x="175" y="240" text-anchor="middle" fill="white" font-size="12">SERVER</text></g>
+<path d="M405 260H595" stroke="url(#g)" stroke-width="7" stroke-dasharray="13 10"/>
+<circle r="10" fill="#57e6ff" filter="url(#glow)"><animateMotion dur="2.4s" repeatCount="indefinite" path="M405 260 H595"/></circle>
+<text x="500" y="235" text-anchor="middle" fill="#57e6ff" font-family="monospace" font-size="14">ROUTER</text>
+<text x="500" y="285" text-anchor="middle" fill="#8299ad" font-family="monospace" font-size="12">decide verso quale rete inoltrare</text>
+<text x="500" y="465" text-anchor="middle" fill="white" font-family="sans-serif" font-size="22">SWITCH = costruisce la LAN · ROUTER = collega LAN diverse</text>
+</svg>

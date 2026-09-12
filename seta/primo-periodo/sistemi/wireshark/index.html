@@ -1,0 +1,91 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wireshark · Tutorial SETA</title><link rel="stylesheet" href="../../../../style.css"></head><body><header><a class="logo" href="../../../../index.html"><b>⌁</b> SETA</a><div class="crumb">06 / WIRESHARK / TUTORIAL</div><a class="backtop" style="margin-left:auto" href="../index.html">← MAPPA</a></header>
+<main class="page"><a class="back" href="../index.html">← TORNA ALLA MAPPA</a><div class="eyebrow">06 · ANALISI DEL TRAFFICO</div><h1>Wireshark:<br><em>imparare a leggere.</em></h1><p class="lead">Non basta vedere tanti pacchetti: bisogna imparare a fare domande alla cattura. Questo tutorial costruisce il metodo passo dopo passo.</p>
+<div class="image-card reveal"><img src="../../../../assets/wireshark-screen.svg" alt="Illustrazione di una schermata Wireshark con lista pacchetti e dettagli"><div class="caption"><b>La schermata è organizzata in più livelli di lettura.</b> Lista dei pacchetti, dettagli del pacchetto e dati.</div></div><div class="definition"><strong>OBIETTIVO DEL TUTORIAL</strong><p>Saper leggere una cattura PCAP, riconoscere le colonne fondamentali, usare filtri di visualizzazione e ricostruire una semplice comunicazione.</p></div>
+
+<h2>1 · Che cos'è Wireshark?</h2><div class="lesson"><aside class="side"><b>CONCETTO</b><p>Analizzatore di protocolli di rete.</p></aside><div class="content"><p>Wireshark permette di catturare e analizzare il traffico di rete. Una cattura può essere salvata in un file <b>PCAP</b>, che conserva i pacchetti osservati.</p><div class="tip"><b>Idea:</b> pensa al PCAP come alla registrazione di una comunicazione. Wireshark è lo strumento che ti permette di riascoltarla, ma pacchetto per pacchetto.</div></div></div>
+
+<h2>2 · Le colonne della cattura</h2><div class="capture"><div class="capture-top"><i></i><i></i><i></i><b>CAPTURE_01.PCAP</b></div><div class="thead"><span>TIME</span><span>SOURCE</span><span>DESTINATION</span><span>PROTOCOL</span><span>INFO</span></div><div class="tr active"><span>0.000000</span><span>10.0.1.50</span><span>10.0.1.1</span><span>DNS</span><span>Standard query aurora.local</span></div><div class="tr"><span>0.021481</span><span>10.0.1.50</span><span>203.0.113.42</span><span>TCP</span><span>443 → TLS</span></div><div class="tr"><span>0.084932</span><span>203.0.113.42</span><span>10.0.1.50</span><span>TLS</span><span>Server Hello</span></div><div class="tr"><span>0.112044</span><span>10.0.1.50</span><span>203.0.113.42</span><span>HTTP</span><span>GET /index.html</span></div></div>
+<div class="lesson"><aside class="side"><b>LEGGI IN QUEST'ORDINE</b><p>Tempo → sorgente → destinazione → protocollo → informazioni.</p></aside><div class="content"><p><b>Time</b>: quando avviene l'evento. <b>Source</b>: chi invia. <b>Destination</b>: chi riceve. <b>Protocol</b>: protocollo riconosciuto. <b>Info</b>: sintesi del contenuto/azione.</p><p>La lettura di queste colonne è spesso il primo passo prima di aprire i dettagli del singolo pacchetto.</p></div></div>
+
+<div class="callout-grid reveal"><div class="card"><div class="stat">01</div><div class="mini-label">OSSERVA</div><p>Prima guarda la sequenza senza filtrare.</p></div><div class="card"><div class="stat">02</div><div class="mini-label">DOMANDA</div><p>Decidi quale comunicazione vuoi trovare.</p></div><div class="card"><div class="stat">03</div><div class="mini-label">FILTRA</div><p>Riduci il rumore con un display filter.</p></div></div><h2>3 · Imparare i filtri</h2><p class="lead">Clicca un filtro per vedere quali righe rimangono. Il simulatore rappresenta il principio dei display filter di Wireshark.</p>
+<div class="filter-list"><button data-f="">tutti</button><button data-f="http">http</button><button data-f="dns">dns</button><button data-f="tls">tls</button><button data-f="ip.addr == 10.0.1.50">ip.addr == 10.0.1.50</button><button data-f="ip.dst == 203.0.113.42">ip.dst == 203.0.113.42</button><button data-f='frame contains "aurora"'>frame contains "aurora"</button></div>
+<div class="simulator"><div class="formbox"><input id="filter" placeholder="oppure scrivi il filtro"><button id="apply">APPLICA</button></div><p id="filterExplain" class="filter-explain">Nessun filtro: visualizziamo l'intera cattura.</p><div class="capture"><div class="capture-top"><b>SIMULATORE PCAP</b></div><div class="thead"><span>TIME</span><span>SOURCE</span><span>DESTINATION</span><span>PROTOCOL</span><span>INFO</span></div><div id="rows"></div></div></div>
+
+<h2>4 · Che cosa significa ogni filtro?</h2><div class="accordion"><button><code>http</code> <span>+</span></button><div class="answer">Mostra i pacchetti che Wireshark identifica come HTTP.</div></div><div class="accordion"><button><code>dns</code> <span>+</span></button><div class="answer">Restringe la visualizzazione alle comunicazioni DNS.</div></div><div class="accordion"><button><code>tls</code> <span>+</span></button><div class="answer">Evidenzia il traffico TLS, usato anche per proteggere HTTPS.</div></div><div class="accordion"><button><code>ip.addr == 10.0.1.50</code> <span>+</span></button><div class="answer">Seleziona i pacchetti in cui quell'IP compare come sorgente o destinazione.</div></div><div class="accordion"><button><code>ip.dst == 203.0.113.42</code> <span>+</span></button><div class="answer">Seleziona il traffico diretto verso l'indirizzo indicato.</div></div><div class="accordion"><button><code>frame contains "aurora"</code> <span>+</span></button><div class="answer">Cerca la stringa nei dati del frame che Wireshark può esaminare.</div></div>
+
+<h2>5 · GET e POST</h2><div class="compare"><div class="card"><span class="tag">GET</span><h3>Chiedere una risorsa</h3><p>È un metodo HTTP usato per ottenere una risorsa.</p><div class="code">GET /index.html</div></div><div class="card"><span class="tag">POST</span><h3>Inviare dati</h3><p>È un metodo HTTP usato per inviare dati al server.</p><div class="code">POST /login</div></div></div>
+
+<h2>6 · HTTP, HTTPS e TLS</h2><div class="tabs" role="tablist"><button class="tab" aria-selected="true" data-tab="httpbox">HTTP</button><button class="tab" aria-selected="false" data-tab="httpsbox">HTTPS</button><button class="tab" aria-selected="false" data-tab="tlsbox">TLS</button></div><div id="httpbox" class="tabpanel active card"><h3>HTTP</h3><p>Protocollo web. La porta 80 è quella tipicamente associata a HTTP.</p></div><div id="httpsbox" class="tabpanel card"><h3>HTTPS</h3><p>HTTP protetto tramite TLS. La porta 443 è quella tipicamente associata al web HTTPS.</p></div><div id="tlsbox" class="tabpanel card"><h3>TLS</h3><p>Protocollo crittografico usato per proteggere la comunicazione. In Wireshark il filtro <code>tls</code> aiuta a individuare il traffico TLS.</p></div>
+
+<h2>7 · Il metodo di analisi</h2><div class="steps"><div class="step" data-n="1"><div><h3>Osserva il tempo</h3><p>Trova l'inizio della sequenza e nota l'ordine degli eventi.</p></div></div><div class="step" data-n="2"><div><h3>Individua sorgente e destinazione</h3><p>Capisci chi comunica con chi.</p></div></div><div class="step" data-n="3"><div><h3>Riconosci il protocollo</h3><p>DNS? TCP? TLS? HTTP? Il campo Protocollo è un primo indizio.</p></div></div><div class="step" data-n="4"><div><h3>Applica un filtro</h3><p>Formula una domanda e riduci il traffico alla parte che ti interessa.</p></div></div><div class="step" data-n="5"><div><h3>Leggi i dettagli</h3><p>Solo dopo aver trovato i pacchetti interessanti, approfondisci il singolo pacchetto.</p></div></div></div>
+
+<div class="tip"><b>Regola d'oro:</b> non partire dal filtro. Parti dalla domanda. “Voglio vedere le richieste DNS” → <code>dns</code>. “Voglio vedere chi comunica con 10.0.1.50” → <code>ip.addr == 10.0.1.50</code>.</div>
+</main><footer>SETA · WIRESHARK · TUTORIAL DI ANALISI</footer>
+<script>
+const data=[["0.000000","10.0.1.50","10.0.1.1","DNS","Standard query aurora.local"],["0.021481","10.0.1.50","203.0.113.42","TCP","443 → TLS"],["0.084932","203.0.113.42","10.0.1.50","TLS","Server Hello"],["0.112044","10.0.1.50","203.0.113.42","HTTP","GET /index.html"],["0.128901","10.0.1.50","203.0.113.42","HTTP","POST /login"]];
+const rows=document.querySelector('#rows'),filter=document.querySelector('#filter'),ex=document.querySelector('#filterExplain');
+function render(q=""){const s=q.trim().toLowerCase();let a=data;if(s==="http"||s==="dns"||s==="tls")a=data.filter(r=>r[3].toLowerCase()===s);else if(s.includes("10.0.1.50"))a=data.filter(r=>r.includes("10.0.1.50"));else if(s.includes("203.0.113.42"))a=data.filter(r=>r.includes("203.0.113.42"));else if(s.includes("aurora"))a=data.filter(r=>r.join(" ").toLowerCase().includes("aurora"));else if(s)a=[];rows.innerHTML=a.map(r=>'<div class="tr active">'+r.map(x=>'<span>'+x+'</span>').join('')+'</div>').join('')||'<div class="empty">Nessun pacchetto corrisponde al filtro.</div>';ex.textContent=s?'Filtro attivo: '+q:'Nessun filtro: visualizziamo l’intera cattura.'}
+document.querySelectorAll('.filter-list button').forEach(b=>b.addEventListener('click',()=>{filter.value=b.dataset.f;render(b.dataset.f)}));document.querySelector('#apply').addEventListener('click',()=>render(filter.value));filter.addEventListener('keydown',e=>{if(e.key==='Enter')render(filter.value)});render();
+document.querySelectorAll('.accordion button').forEach(b=>b.addEventListener('click',()=>{b.parentElement.classList.toggle('open');b.querySelector('span').textContent=b.parentElement.classList.contains('open')?'−':'+'}));
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected','false'));document.querySelectorAll('.tabpanel').forEach(x=>x.classList.remove('active'));b.setAttribute('aria-selected','true');document.getElementById(b.dataset.tab).classList.add('active')}));
+</script><script>const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.12});document.querySelectorAll('.reveal').forEach(x=>io.observe(x));</script>
+<script>
+(function(){
+  const header=document.querySelector('header');
+  if(header){
+    const nav=header.querySelector('.nav');
+    if(nav){
+      const btn=document.createElement('button');
+      btn.className='mobile-menu-toggle';
+      btn.setAttribute('aria-label','Apri menu');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML='☰';
+      header.appendChild(btn);
+      btn.addEventListener('click',()=>{
+        const open=nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded',String(open));
+        btn.innerHTML=open?'×':'☰';
+      });
+      nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+        nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.innerHTML='☰';
+      }));
+    }
+  }
+  const bar=document.createElement('div');
+  bar.className='mobile-progress';
+  document.body.prepend(bar);
+  const update=()=>{
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  };
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',update);
+  update();
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-answer-box] .choice').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('[data-answer-box] .choice').forEach(x=>x.classList.remove('correct','wrong'));
+      const ok=b.dataset.correct==='1';
+      b.classList.add(ok?'correct':'wrong');
+      const f=document.querySelector('[data-answer-box] + .feedback');
+      if(f) f.textContent=ok ? 'Corretto: lo switch collega i dispositivi della stessa LAN. Se invece la destinazione è in un’altra rete, serve un router.' : 'Quasi: pensa alla differenza tra collegare dispositivi nella stessa LAN e interconnettere reti diverse.';
+    });
+  });
+  const ip=document.querySelector('[data-ip-check]');
+  if(ip) ip.addEventListener('click',()=>{
+    const f=document.querySelector('[data-ip-feedback]');
+    if(f) f.innerHTML='<b>Risultato:</b> sì. Con /24 entrambi appartengono alla rete <code>192.168.1.0/24</code>, quindi sono nella stessa rete IP.';
+  });
+  document.querySelectorAll('[data-service]').forEach(b=>b.addEventListener('click',()=>{
+    const answers={dns:'DNS: serve a risolvere un nome di dominio in un indirizzo IP.',dhcp:'DHCP: assegna automaticamente la configurazione di rete al client.',arp:'ARP: associa un indirizzo IPv4 locale al corrispondente indirizzo MAC.',acl:'ACL: applica regole per permettere o negare traffico.'};
+    const f=document.querySelector('[data-service-feedback]'); if(f) f.textContent=answers[b.dataset.service];
+  }));
+});
+</script>
+</body></html>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520">
+<defs>
+ <linearGradient id="g" x1="0" x2="1"><stop stop-color="#57e6ff"/><stop offset="1" stop-color="#a98cff"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <style>.t{font-family:Inter,Arial,sans-serif;fill:#edf5ff}.m{font-family:Inter,Arial,sans-serif;fill:#94a8bf}.node{fill:#0c1725;stroke:#3d5875;stroke-width:3}.ln{stroke:#30445d;stroke-width:4;fill:none}.pulse{fill:#57e6ff;filter:url(#glow)}</style>
+</defs>
+<rect width="1200" height="520" rx="28" fill="#09111d"/>
+<path class="ln" d="M180 260H410M500 260H700M790 260H1020"/>
+<path d="M180 260H410" stroke="url(#g)" stroke-width="2" stroke-dasharray="12 14"/>
+<path d="M500 260H700" stroke="url(#g)" stroke-width="2" stroke-dasharray="12 14"/>
+<path d="M790 260H1020" stroke="url(#g)" stroke-width="2" stroke-dasharray="12 14"/>
+<circle class="pulse" cx="180" cy="260" r="7"><animate attributeName="cx" values="180;410;180" dur="3.8s" repeatCount="indefinite"/></circle>
+<circle class="pulse" cx="500" cy="260" r="7"><animate attributeName="cx" values="500;700;500" dur="3.2s" repeatCount="indefinite"/></circle>
+<circle class="pulse" cx="790" cy="260" r="7"><animate attributeName="cx" values="790;1020;790" dur="4.2s" repeatCount="indefinite"/></circle>
+<g><circle class="node" cx="140" cy="260" r="48"/><text class="t" x="140" y="268" text-anchor="middle" font-size="27" font-weight="800">PC</text><text class="t" x="140" y="350" text-anchor="middle" font-size="21" font-weight="800">CLIENT</text><text class="m" x="140" y="380" text-anchor="middle" font-size="16">chiede</text></g>
+<g><rect class="node" x="410" y="212" width="90" height="96" rx="18"/><text class="t" x="455" y="268" text-anchor="middle" font-size="25" font-weight="800">SW</text><text class="t" x="455" y="350" text-anchor="middle" font-size="21" font-weight="800">SWITCH</text><text class="m" x="455" y="380" text-anchor="middle" font-size="16">collega</text></g>
+<g><circle class="node" cx="745" cy="260" r="48"/><text class="t" x="745" y="268" text-anchor="middle" font-size="24" font-weight="800">R</text><text class="t" x="745" y="350" text-anchor="middle" font-size="21" font-weight="800">ROUTER</text><text class="m" x="745" y="380" text-anchor="middle" font-size="16">instrada</text></g>
+<g><rect class="node" x="1020" y="212" width="90" height="96" rx="18"/><text class="t" x="1065" y="268" text-anchor="middle" font-size="22" font-weight="800">SV</text><text class="t" x="1065" y="350" text-anchor="middle" font-size="21" font-weight="800">SERVER</text><text class="m" x="1065" y="380" text-anchor="middle" font-size="16">risponde</text></g>
+<text class="m" x="600" y="95" text-anchor="middle" font-size="18" letter-spacing="5">UNA COMUNICAZIONE ATTRAVERSA PIÙ RUOLI</text>
+</svg>

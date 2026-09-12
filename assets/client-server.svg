@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#57e6ff"/><stop offset="1" stop-color="#a98cff"/></linearGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect width="900" height="480" rx="30" fill="#07111c"/>
+<g stroke="#24394d" stroke-width="2"><path d="M80 390H820M80 90H820"/></g>
+<text x="70" y="55" fill="#8198ad" font-family="monospace" font-size="16">CLIENT / SERVER · RICHIESTA E RISPOSTA</text>
+<g transform="translate(90 150)">
+<rect width="250" height="150" rx="18" fill="#0c1b29" stroke="#57e6ff" stroke-width="2"/>
+<rect x="35" y="28" width="180" height="92" rx="8" fill="#10283a" stroke="#34566d"/>
+<circle cx="125" cy="135" r="6" fill="#57e6ff"/>
+<text x="125" y="180" text-anchor="middle" fill="white" font-size="25" font-family="sans-serif">CLIENT</text>
+<text x="125" y="205" text-anchor="middle" fill="#7f9ab0" font-size="15" font-family="monospace">chiede una risorsa</text></g>
+<g transform="translate(560 150)">
+<rect width="250" height="150" rx="18" fill="#0c1b29" stroke="#a98cff" stroke-width="2"/>
+<rect x="35" y="24" width="180" height="100" rx="8" fill="#111c35" stroke="#4b4d76"/>
+<path d="M60 55h130M60 78h130M60 101h100" stroke="#a98cff" stroke-width="5"/>
+<text x="125" y="180" text-anchor="middle" fill="white" font-size="25" font-family="sans-serif">SERVER</text>
+<text x="125" y="205" text-anchor="middle" fill="#7f9ab0" font-size="15" font-family="monospace">risponde / offre il servizio</text></g>
+<path d="M350 220H550" stroke="url(#g)" stroke-width="5" stroke-dasharray="12 10"/>
+<path d="M520 205l30 15-30 15" fill="none" stroke="#a98cff" stroke-width="5"/>
+<circle r="9" fill="#57e6ff" filter="url(#glow)"><animateMotion dur="2.2s" repeatCount="indefinite" path="M350 220 H550"/></circle>
+<path d="M550 270H350" stroke="#365169" stroke-width="3" stroke-dasharray="7 12"/>
+<text x="450" y="250" text-anchor="middle" fill="#57e6ff" font-family="monospace" font-size="14">REQUEST</text>
+<text x="450" y="292" text-anchor="middle" fill="#71899d" font-family="monospace" font-size="13">RESPONSE ↩</text>
+</svg>

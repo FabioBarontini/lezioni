@@ -1,0 +1,65 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Protocolli e porte · SETA</title><link rel="stylesheet" href="../../../../style.css"></head><body><header><a class="logo" href="../../../../index.html"><b>⌁</b> SETA</a><div class="crumb">03 / PROTOCOLLI E PORTE</div><a class="backtop" style="margin-left:auto" href="../index.html">← MAPPA</a></header><main class="page"><a class="back" href="../index.html">← TORNA ALLA MAPPA</a><div class="eyebrow">03 · COMUNICAZIONE</div><h1>Le regole.<br><em>Le porte.</em></h1><p class="lead">Protocollo e porta sono concetti diversi ma strettamente collegati quando osserviamo un servizio di rete.</p>
+<div class="compare"><div class="card"><span class="tag">PROTOCOLLO</span><h2>Le regole</h2><p>Definisce come vengono formati e interpretati i messaggi e come i sistemi devono comportarsi durante la comunicazione.</p></div><div class="card"><span class="tag">PORTA</span><h2>L'accesso logico</h2><p>Permette di distinguere servizi diversi sullo stesso dispositivo.</p></div></div>
+<div class="section"><div class="eyebrow">ESEMPI</div><div class="toc"><a href="#http"><small>80</small><strong>HTTP</strong><span>Web normalmente non cifrato.</span></a><a href="#https"><small>443</small><strong>HTTPS</strong><span>Web protetto con TLS.</span></a><a href="#dns"><small>53</small><strong>DNS</strong><span>Risoluzione dei nomi.</span></a></div></div>
+<div class="lesson"><aside class="side"><b>HTTP / HTTPS</b><p>Porta tipica: 80 / 443.</p></aside><div class="content"><h2 id="http">HTTP</h2><p>HTTP è il protocollo usato per trasferire risorse web. La porta 80 è quella tipicamente associata a HTTP.</p><div class="code">GET /index.html HTTP/1.1</div><h2 id="https">HTTPS</h2><p>HTTPS è HTTP protetto tramite TLS. La porta 443 è quella tipicamente associata al servizio web HTTPS.</p><div class="code">TLS → HTTP protetto</div><h2 id="dns">DNS</h2><p>DNS permette di risolvere nomi di dominio in indirizzi IP. Il traffico DNS è comunemente associato alla porta 53.</p></div></div>
+<div class="tip"><b>Da ricordare:</b> protocollo = regole della comunicazione; porta = punto di accesso logico a un servizio.</div></main><footer>SETA · SISTEMI E RETI · PROTOCOLLI E PORTE</footer>
+<script>
+(function(){
+  const header=document.querySelector('header');
+  if(header){
+    const nav=header.querySelector('.nav');
+    if(nav){
+      const btn=document.createElement('button');
+      btn.className='mobile-menu-toggle';
+      btn.setAttribute('aria-label','Apri menu');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML='☰';
+      header.appendChild(btn);
+      btn.addEventListener('click',()=>{
+        const open=nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded',String(open));
+        btn.innerHTML=open?'×':'☰';
+      });
+      nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+        nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.innerHTML='☰';
+      }));
+    }
+  }
+  const bar=document.createElement('div');
+  bar.className='mobile-progress';
+  document.body.prepend(bar);
+  const update=()=>{
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  };
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',update);
+  update();
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-answer-box] .choice').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('[data-answer-box] .choice').forEach(x=>x.classList.remove('correct','wrong'));
+      const ok=b.dataset.correct==='1';
+      b.classList.add(ok?'correct':'wrong');
+      const f=document.querySelector('[data-answer-box] + .feedback');
+      if(f) f.textContent=ok ? 'Corretto: lo switch collega i dispositivi della stessa LAN. Se invece la destinazione è in un’altra rete, serve un router.' : 'Quasi: pensa alla differenza tra collegare dispositivi nella stessa LAN e interconnettere reti diverse.';
+    });
+  });
+  const ip=document.querySelector('[data-ip-check]');
+  if(ip) ip.addEventListener('click',()=>{
+    const f=document.querySelector('[data-ip-feedback]');
+    if(f) f.innerHTML='<b>Risultato:</b> sì. Con /24 entrambi appartengono alla rete <code>192.168.1.0/24</code>, quindi sono nella stessa rete IP.';
+  });
+  document.querySelectorAll('[data-service]').forEach(b=>b.addEventListener('click',()=>{
+    const answers={dns:'DNS: serve a risolvere un nome di dominio in un indirizzo IP.',dhcp:'DHCP: assegna automaticamente la configurazione di rete al client.',arp:'ARP: associa un indirizzo IPv4 locale al corrispondente indirizzo MAC.',acl:'ACL: applica regole per permettere o negare traffico.'};
+    const f=document.querySelector('[data-service-feedback]'); if(f) f.textContent=answers[b.dataset.service];
+  }));
+});
+</script>
+</body></html>

@@ -1,0 +1,87 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Indirizzo IP · SETA</title><link rel="stylesheet" href="../../../../style.css"></head><body><header><a class="logo" href="../../../../index.html"><b>⌁</b> SETA</a><div class="crumb">02 / INDIRIZZO IP</div><a class="backtop" style="margin-left:auto" href="../index.html">← MAPPA</a></header><main class="page"><a class="back" href="../index.html">← TORNA ALLA MAPPA</a><div class="eyebrow">02 · INDIRIZZAMENTO</div><h1>Da dove parte?<br><em>Dove arriva?</em></h1><p class="lead">L'indirizzo IP permette di identificare sorgente e destinazione di una comunicazione IP.</p>
+<div class="definition"><strong>ESEMPIO</strong><p><code>10.0.1.50</code> → <code>203.0.113.42</code>. Il primo è l'IP sorgente, il secondo l'IP destinazione.</p></div>
+<div class="flow"><div class="device"><b>10.0.1.50</b>IP sorgente</div><span class="arrow">→</span><div class="device"><b>203.0.113.42</b>IP destinazione</div></div>
+<div class="lesson"><aside class="side"><b>SORGENTE</b><p>Il dispositivo che invia il pacchetto.</p><b>DESTINAZIONE</b><p>Il dispositivo verso cui il pacchetto è diretto.</p></aside><div class="content"><h2>Leggere le colonne</h2><p>In Wireshark, <b>Source</b> indica la sorgente e <b>Destination</b> la destinazione. Guardando più righe puoi capire la direzione della comunicazione.</p><h3>Filtrare per indirizzo</h3><div class="code">ip.addr == 10.0.1.50</div><p>Mostra i pacchetti che coinvolgono quell'indirizzo, sia come sorgente sia come destinazione.</p><div class="code">ip.dst == 203.0.113.42</div><p>Mostra il traffico diretto verso quella destinazione.</p></div></div>
+<div class="card"><h2>Costruisci il tuo filtro</h2><p>Inserisci un IP e scegli che cosa vuoi osservare.</p><div class="formbox"><input id="ip" value="10.0.1.50" aria-label="Indirizzo IP"><button data-kind="addr">IP coinvolto</button><button data-kind="src">Sorgente</button><button data-kind="dst">Destinazione</button></div><div id="out" class="code">ip.addr == 10.0.1.50</div></div>
+<div class="warning"><b>Attenzione:</b> un IP identifica un'interfaccia a livello IP. Non va confuso con l'indirizzo MAC, che appartiene a un livello diverso.</div>
+<section class="visual-learning reveal">
+  <div class="image-card"><img src="../../../../assets/ip-address.svg" alt="Schema di un indirizzo IPv4 con sorgente e destinazione">
+    <div class="caption"><b>Un indirizzo IP non è solo un numero.</b> In IPv4 è formato da 32 bit, normalmente scritti come quattro ottetti decimali. Insieme alla subnet mask permette di distinguere la parte di rete dalla parte che identifica l'host.</div>
+  </div>
+  <div class="concept-grid">
+    <article class="card"><div class="stat">01</div><h3>IPv4</h3><p>Un indirizzo IPv4 contiene 32 bit. Esempio: <code>192.168.1.50</code>.</p></article>
+    <article class="card"><div class="stat">02</div><h3>Subnet mask</h3><p>Con <code>255.255.255.0</code> la rete è <code>192.168.1.0/24</code> e l'host è nella parte finale.</p></article>
+    <article class="card"><div class="stat">03</div><h3>Privato o pubblico?</h3><p><code>192.168.x.x</code>, <code>10.x.x.x</code> e <code>172.16.x.x–172.31.x.x</code> sono intervalli privati. Gli indirizzi pubblici sono utilizzabili per comunicare attraverso Internet.</p></article>
+    <article class="card"><div class="stat">04</div><h3>Gateway</h3><p>Se la destinazione è fuori dalla rete locale, l'host invia il traffico al default gateway, normalmente un router.</p></article>
+  </div>
+  <div class="interactive-card">
+    <div class="eyebrow">INTERAZIONE · IP</div><h3>È nella stessa rete?</h3>
+    <p>Confronta <code>192.168.1.50/24</code> e <code>192.168.1.120/24</code>.</p>
+    <button class="action-button" data-ip-check>VERIFICA</button>
+    <p class="feedback" data-ip-feedback>La subnet /24 usa i primi tre ottetti come parte di rete.</p>
+  </div>
+</section>
+</main><footer>SETA · SISTEMI E RETI · INDIRIZZAMENTO</footer><script>
+const valid=v=>/^(\\d{1,3}\\.){3}\\d{1,3}$/.test(v)&&v.split('.').every(n=>+n>=0&&+n<=255);
+document.querySelectorAll('[data-kind]').forEach(b=>b.addEventListener('click',()=>{let v=document.querySelector('#ip').value.trim();if(!valid(v)){v='10.0.1.50';document.querySelector('#ip').value=v}let k=b.dataset.kind;document.querySelector('#out').textContent=(k==='src'?'ip.src == ':k==='dst'?'ip.dst == ':'ip.addr == ')+v}));
+</script>
+<script>
+(function(){
+  const header=document.querySelector('header');
+  if(header){
+    const nav=header.querySelector('.nav');
+    if(nav){
+      const btn=document.createElement('button');
+      btn.className='mobile-menu-toggle';
+      btn.setAttribute('aria-label','Apri menu');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML='☰';
+      header.appendChild(btn);
+      btn.addEventListener('click',()=>{
+        const open=nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded',String(open));
+        btn.innerHTML=open?'×':'☰';
+      });
+      nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+        nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.innerHTML='☰';
+      }));
+    }
+  }
+  const bar=document.createElement('div');
+  bar.className='mobile-progress';
+  document.body.prepend(bar);
+  const update=()=>{
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  };
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',update);
+  update();
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-answer-box] .choice').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('[data-answer-box] .choice').forEach(x=>x.classList.remove('correct','wrong'));
+      const ok=b.dataset.correct==='1';
+      b.classList.add(ok?'correct':'wrong');
+      const f=document.querySelector('[data-answer-box] + .feedback');
+      if(f) f.textContent=ok ? 'Corretto: lo switch collega i dispositivi della stessa LAN. Se invece la destinazione è in un’altra rete, serve un router.' : 'Quasi: pensa alla differenza tra collegare dispositivi nella stessa LAN e interconnettere reti diverse.';
+    });
+  });
+  const ip=document.querySelector('[data-ip-check]');
+  if(ip) ip.addEventListener('click',()=>{
+    const f=document.querySelector('[data-ip-feedback]');
+    if(f) f.innerHTML='<b>Risultato:</b> sì. Con /24 entrambi appartengono alla rete <code>192.168.1.0/24</code>, quindi sono nella stessa rete IP.';
+  });
+  document.querySelectorAll('[data-service]').forEach(b=>b.addEventListener('click',()=>{
+    const answers={dns:'DNS: serve a risolvere un nome di dominio in un indirizzo IP.',dhcp:'DHCP: assegna automaticamente la configurazione di rete al client.',arp:'ARP: associa un indirizzo IPv4 locale al corrispondente indirizzo MAC.',acl:'ACL: applica regole per permettere o negare traffico.'};
+    const f=document.querySelector('[data-service-feedback]'); if(f) f.textContent=answers[b.dataset.service];
+  }));
+});
+</script>
+</body></html>

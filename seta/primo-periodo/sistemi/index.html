@@ -1,0 +1,75 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sistemi e Reti · SETA</title><link rel="stylesheet" href="../../../style.css"></head><body>
+<header><a class="logo" href="../../../index.html"><b>⌁</b> SETA</a><div class="crumb">PRIMO PERIODO / SISTEMI E RETI</div><a class="backtop" style="margin-left:auto" href="../../../index.html">← HOME</a></header>
+<main class="page"><div class="eyebrow">PERCORSO DI STUDIO</div><h1>Dalla rete<br><em>alla sua analisi.</em></h1><p class="lead">Le pagine seguono una progressione precisa: prima impari il linguaggio della rete, poi impari a riconoscerlo dentro una cattura.</p>
+<div class="definition"><strong>ORDINE CONSIGLIATO</strong><p>1. Componenti → 2. IP → 3. Protocolli e porte → 4. Pacchetti → 5. DNS/DHCP/ARP/ACL → 6. Wireshark.</p></div>
+<div class="toc">
+<a href="componenti/index.html"><small>01 · FONDAMENTI</small><strong>Componenti della rete</strong><span>Client, server, switch, router e flusso della comunicazione.</span></a>
+<a href="ip/index.html"><small>02 · INDIRIZZAMENTO</small><strong>Indirizzo IP</strong><span>Sorgente, destinazione, esempi e filtri.</span></a>
+<a href="protocolli-porte/index.html"><small>03 · COMUNICAZIONE</small><strong>Protocolli e porte</strong><span>Regole, servizi, HTTP, HTTPS, DNS e DHCP.</span></a>
+<a href="pacchetto/index.html"><small>04 · DATI</small><strong>Il pacchetto</strong><span>Incapsulamento, livelli e importanza del tempo.</span></a>
+<a href="dns-dhcp-arp-acl/index.html"><small>05 · SERVIZI</small><strong>DNS · DHCP · ARP · ACL</strong><span>Che problema risolve ciascun meccanismo?</span></a>
+<a href="wireshark/index.html"><small>06 · TUTORIAL</small><strong>Wireshark</strong><span>Dalla cattura ai filtri e alla ricostruzione della comunicazione.</span></a>
+</div>
+<section class="section"><div class="section-title"><div><div class="eyebrow">OBIETTIVI</div><h2>Alla fine saprai...</h2></div></div>
+<div class="compare"><div class="card"><span class="tag">TEORIA</span><h3>Spiegare</h3><p>Definire IP, protocollo, porta, pacchetto, DNS, DHCP, ARP e ACL.</p></div><div class="card"><span class="tag">PRATICA</span><h3>Riconoscere</h3><p>Individuare sorgente, destinazione e protocollo in una cattura.</p></div><div class="card"><span class="tag">WIRESHARK</span><h3>Filtrare</h3><p>Usare filtri di visualizzazione per isolare il traffico interessante.</p></div><div class="card"><span class="tag">ANALISI</span><h3>Ricostruire</h3><p>Seguire una comunicazione rispettando l'ordine temporale degli eventi.</p></div></div></section>
+</main><footer>SETA · SISTEMI E RETI · SPIEGAZIONI E TUTORIAL</footer>
+<script>
+(function(){
+  const header=document.querySelector('header');
+  if(header){
+    const nav=header.querySelector('.nav');
+    if(nav){
+      const btn=document.createElement('button');
+      btn.className='mobile-menu-toggle';
+      btn.setAttribute('aria-label','Apri menu');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML='☰';
+      header.appendChild(btn);
+      btn.addEventListener('click',()=>{
+        const open=nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded',String(open));
+        btn.innerHTML=open?'×':'☰';
+      });
+      nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+        nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.innerHTML='☰';
+      }));
+    }
+  }
+  const bar=document.createElement('div');
+  bar.className='mobile-progress';
+  document.body.prepend(bar);
+  const update=()=>{
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  };
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',update);
+  update();
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-answer-box] .choice').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('[data-answer-box] .choice').forEach(x=>x.classList.remove('correct','wrong'));
+      const ok=b.dataset.correct==='1';
+      b.classList.add(ok?'correct':'wrong');
+      const f=document.querySelector('[data-answer-box] + .feedback');
+      if(f) f.textContent=ok ? 'Corretto: lo switch collega i dispositivi della stessa LAN. Se invece la destinazione è in un’altra rete, serve un router.' : 'Quasi: pensa alla differenza tra collegare dispositivi nella stessa LAN e interconnettere reti diverse.';
+    });
+  });
+  const ip=document.querySelector('[data-ip-check]');
+  if(ip) ip.addEventListener('click',()=>{
+    const f=document.querySelector('[data-ip-feedback]');
+    if(f) f.innerHTML='<b>Risultato:</b> sì. Con /24 entrambi appartengono alla rete <code>192.168.1.0/24</code>, quindi sono nella stessa rete IP.';
+  });
+  document.querySelectorAll('[data-service]').forEach(b=>b.addEventListener('click',()=>{
+    const answers={dns:'DNS: serve a risolvere un nome di dominio in un indirizzo IP.',dhcp:'DHCP: assegna automaticamente la configurazione di rete al client.',arp:'ARP: associa un indirizzo IPv4 locale al corrispondente indirizzo MAC.',acl:'ACL: applica regole per permettere o negare traffico.'};
+    const f=document.querySelector('[data-service-feedback]'); if(f) f.textContent=answers[b.dataset.service];
+  }));
+});
+</script>
+</body></html>

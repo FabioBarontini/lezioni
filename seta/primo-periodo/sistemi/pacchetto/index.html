@@ -1,0 +1,65 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Il pacchetto · SETA</title><link rel="stylesheet" href="../../../../style.css"></head><body><header><a class="logo" href="../../../../index.html"><b>⌁</b> SETA</a><div class="crumb">04 / PACCHETTO</div><a class="backtop" style="margin-left:auto" href="../index.html">← MAPPA</a></header><main class="page"><a class="back" href="../index.html">← TORNA ALLA MAPPA</a><div class="eyebrow">04 · DATI IN VIAGGIO</div><h1>La rete viaggia<br><em>a pezzi.</em></h1><p class="lead">Durante una comunicazione i dati vengono trasportati attraverso unità che possiamo osservare nella cattura.</p>
+<div class="image-card reveal"><img src="../../../../assets/packet-anatomy.svg" alt="Schema visuale dell’incapsulamento: dati, trasporto, IP e frame"><div class="caption"><b>Lettura visuale dell’incapsulamento.</b> Ogni livello aggiunge informazioni utili alla trasmissione.</div></div><div class="definition"><strong>PERCHÉ È UTILE</strong><p>Wireshark ci permette di osservare i pacchetti e di seguirne la sequenza nel tempo.</p></div>
+<div class="lesson"><aside class="side"><b>INCAPSULAMENTO</b><p>Ogni livello aggiunge informazioni utili alla trasmissione.</p></aside><div class="content"><div class="card"><b>DATI</b><p>Il contenuto prodotto dall'applicazione.</p></div><div class="card"><b>TRASPORTO</b><p>Informazioni del livello di trasporto, per esempio TCP o UDP.</p></div><div class="card"><b>IP</b><p>Informazioni per identificare sorgente e destinazione IP.</p></div><div class="card"><b>FRAME</b><p>Informazioni relative al collegamento locale.</p></div></div></div>
+<div class="card"><h2>Il tempo ricostruisce la sequenza</h2><div class="flow"><div class="device"><b>0.000</b>DNS</div><span class="arrow">→</span><div class="device"><b>0.021</b>TCP</div><span class="arrow">→</span><div class="device"><b>0.085</b>TLS</div><span class="arrow">→</span><div class="device"><b>0.112</b>HTTP</div></div><p>Il timestamp di ogni pacchetto permette di seguire l'ordine degli eventi. È uno degli indizi più importanti durante un'analisi.</p></div>
+<div class="tip"><b>Domanda guida:</b> se trovi una serie di pacchetti, prova a raccontare la sequenza usando solo tempo, sorgente, destinazione e protocollo.</div></main><footer>SETA · SISTEMI E RETI · PACCHETTO</footer><script>const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.12});document.querySelectorAll('.reveal').forEach(x=>io.observe(x));</script>
+<script>
+(function(){
+  const header=document.querySelector('header');
+  if(header){
+    const nav=header.querySelector('.nav');
+    if(nav){
+      const btn=document.createElement('button');
+      btn.className='mobile-menu-toggle';
+      btn.setAttribute('aria-label','Apri menu');
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML='☰';
+      header.appendChild(btn);
+      btn.addEventListener('click',()=>{
+        const open=nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded',String(open));
+        btn.innerHTML=open?'×':'☰';
+      });
+      nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+        nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.innerHTML='☰';
+      }));
+    }
+  }
+  const bar=document.createElement('div');
+  bar.className='mobile-progress';
+  document.body.prepend(bar);
+  const update=()=>{
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  };
+  addEventListener('scroll',update,{passive:true});
+  addEventListener('resize',update);
+  update();
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-answer-box] .choice').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('[data-answer-box] .choice').forEach(x=>x.classList.remove('correct','wrong'));
+      const ok=b.dataset.correct==='1';
+      b.classList.add(ok?'correct':'wrong');
+      const f=document.querySelector('[data-answer-box] + .feedback');
+      if(f) f.textContent=ok ? 'Corretto: lo switch collega i dispositivi della stessa LAN. Se invece la destinazione è in un’altra rete, serve un router.' : 'Quasi: pensa alla differenza tra collegare dispositivi nella stessa LAN e interconnettere reti diverse.';
+    });
+  });
+  const ip=document.querySelector('[data-ip-check]');
+  if(ip) ip.addEventListener('click',()=>{
+    const f=document.querySelector('[data-ip-feedback]');
+    if(f) f.innerHTML='<b>Risultato:</b> sì. Con /24 entrambi appartengono alla rete <code>192.168.1.0/24</code>, quindi sono nella stessa rete IP.';
+  });
+  document.querySelectorAll('[data-service]').forEach(b=>b.addEventListener('click',()=>{
+    const answers={dns:'DNS: serve a risolvere un nome di dominio in un indirizzo IP.',dhcp:'DHCP: assegna automaticamente la configurazione di rete al client.',arp:'ARP: associa un indirizzo IPv4 locale al corrispondente indirizzo MAC.',acl:'ACL: applica regole per permettere o negare traffico.'};
+    const f=document.querySelector('[data-service-feedback]'); if(f) f.textContent=answers[b.dataset.service];
+  }));
+});
+</script>
+</body></html>
