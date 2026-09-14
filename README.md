@@ -20,3 +20,12 @@ Le immagini SVG sono locali e non dipendono da servizi esterni. Il sito è stati
 - Tabelle e codice scorrono orizzontalmente quando necessario.
 - Controlli interattivi dimensionati per il touch.
 - Animazioni preservate, con rispetto di prefers-reduced-motion.
+
+
+## Demo Wireshark docente
+- pagina dedicata alla dimostrazione guidata di Wireshark;
+- PCAP neutro locale: `seta/primo-periodo/sistemi/wireshark/demo/Wireshark_Demo_Didattica_Neutra.pcap`;
+- percorso didattico: ARP → DNS → TCP → HTTP → TLS;
+- nessun elemento narrativo o indizio collegato all'attività BLACKOUT.
+
+- pagina docente con download diretto del PCAP e analisi guidata passo passo;
